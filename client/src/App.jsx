@@ -2,18 +2,25 @@
 import * as React from 'react';
 import axios from "axios";
 import MatchList from "./MatchList.jsx";
+import Search from "./Search.jsx";
 import styled from "styled-components";
 // import config from '../../config.js';
 
+const StyledDiv = styled.div`
+  font-family: helvetica neue;
+`;
+
+
 const NavBar = styled.span`
-  height: 50px;
+  height: 65px;
   overflow: hidden;
-  background-color: grey;
+  background-color: maroon;
   position: fixed;
   top: 0;
   width: 100%;
   margin-left: 0%;
   box-shadow: 0 4px 4px -2px gray;
+  font-family: helvetica neue;
 `;
 
   // height: 50px;
@@ -27,6 +34,7 @@ const NavBar = styled.span`
 
 const App = () => {
   const [matches, setMatches] = React.useState([]);
+  const [filteredMatches, setFilteredMatches] = React.useState(matches);
   const [match, setMatch] = React.useState([]);
   const [loading, setLoading] = React.useState(true);
 
@@ -35,6 +43,7 @@ const App = () => {
     axios.get('/matches')
     .then(matchesData => {
       setMatches(matchesData.data);
+      setFilteredMatches(matchesData.data);
       setLoading(false);
     })
     .catch(err => {
@@ -51,7 +60,6 @@ const App = () => {
       caches.open(cacheName)
       .then((cache) => {
         cache.put(url, data);
-        alert('Data Added into cache!')
       })
       .catch(() => {
         console.log('unable to cache')
@@ -59,24 +67,48 @@ const App = () => {
     }
   };
 
+  //SEARCHES BY DATE RANGE AND TEAM NAME
+  const onSearchKeystroke = (e) => {
+    e.preventDefault();
+    var userSearch = e.target.value;
+    var results = [];
+    console.log(userSearch)
+
+    if (userSearch.length) {
+      //filters match NAME and DATE by user search
+      matches.map((matchObj) => {
+        let lowercaseMatchname = matchObj.fixture.toLowerCase();
+        let matchDate = matchObj.game_date;
+        if (lowercaseMatchname.includes(userSearch) || matchDate.includes(userSearch)) {
+          results.push(matchObj);
+        }
+      })
+      //filteredMatches includes only filtered results
+      setFilteredMatches(results);
+    } else {
+      //filteredMatches include ALL match data
+      setFilteredMatches(matches);
+    }
+  };
+
+
   //ON PAGE LOAD, useEffect WILL RUN
   React.useEffect(() => {
     getMatches();
-    // setTimeout(() => {
-    //   addDataIntoCache('MyCache',
-    //   'https://localhost:2828', matches)
-    //   console.log("Delayed for 5 seconds.");
-    // }, "5000")
+    setTimeout(() => {
+      addDataIntoCache('MatchCache',
+      'https://localhost:2828', matches)
+      console.log("Cache delayed for 2 seconds.");
+    }, "2000")
   }, []);
 
   return (
-    <div>
-    <NavBar/>
-    {loading ? <div>Loading...</div> : <MatchList matchData={matches}/>}
-    {/* <button onClick={()=>addDataIntoCache('MyCache',
-      'https://localhost:2828', 200)} >
-        Add Data Into Cache</button> */}
-    </div>
+    <StyledDiv>
+    <NavBar>
+      <Search onSearchKeystroke={onSearchKeystroke}/>
+    </NavBar>
+    {loading ? <div>Loading...</div> : <MatchList matchData={filteredMatches}/>}
+    </StyledDiv>
   )
 }
 
