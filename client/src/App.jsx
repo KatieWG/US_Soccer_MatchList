@@ -2,7 +2,28 @@
 import * as React from 'react';
 import axios from "axios";
 import MatchList from "./MatchList.jsx";
+import styled from "styled-components";
 // import config from '../../config.js';
+
+const NavBar = styled.span`
+  height: 50px;
+  overflow: hidden;
+  background-color: grey;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  margin-left: 0%;
+  box-shadow: 0 4px 4px -2px gray;
+`;
+
+  // height: 50px;
+  // background-color: grey;
+  // standard-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  // display: flex;
+  // justify-content: space-evenly;
+  // align-items: center;
+  // margin:0;
+  // padding:0;
 
 const App = () => {
   const [matches, setMatches] = React.useState([]);
@@ -50,6 +71,7 @@ const App = () => {
 
   return (
     <div>
+    <NavBar/>
     {loading ? <div>Loading...</div> : <MatchList matchData={matches}/>}
     {/* <button onClick={()=>addDataIntoCache('MyCache',
       'https://localhost:2828', 200)} >
