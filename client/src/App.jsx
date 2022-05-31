@@ -5,6 +5,7 @@ import MatchList from "./MatchList.jsx";
 import MatchStats from "./MatchStats.jsx";
 import Search from "./Search.jsx";
 import styled from "styled-components";
+import logo from "./usSoccerLogo.png";
 // import config from '../../config.js';
 
 const StyledDiv = styled.div`
@@ -13,14 +14,20 @@ const StyledDiv = styled.div`
 
 const NavBar = styled.span`
   height: 95px;
-  overflow: hidden;
-  background-color: maroon;
+  background-color: #c62034;
   position: fixed;
   top: 0;
   width: 100%;
   margin-left: -8px;
   box-shadow: 0 4px 4px -2px gray;
   font-family: helvetica neue;
+  display: flex;
+`;
+
+
+const StyledImg = styled.img`
+  height: 70px;
+  margin: 15px 15px 15px 15px;
 `;
 
   // height: 50px;
@@ -120,6 +127,7 @@ const App = () => {
     (homepage ?
       <div>
         <NavBar>
+          <StyledImg src={logo} alt="Logo"/>
           <Search onSearchKeystroke={onSearchKeystroke}/>
         </NavBar>
         <MatchList matchData={filteredMatches} onPageChange={onPageChange}/>
@@ -127,6 +135,7 @@ const App = () => {
       :
       <div>
         <NavBar>
+          <StyledImg src={logo} alt="Logo"/>
           <Search onSearchKeystroke={onSearchKeystroke}/>
         </NavBar>
         <div>rendering now</div>

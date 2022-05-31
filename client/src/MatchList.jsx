@@ -1,9 +1,12 @@
 import React from "react";
 import Match from "./Match.jsx"
 import styled from "styled-components";
+import logo from "./usSoccerLogo.png";
+
 
 const StyledDiv = styled.div`
   margin-top: 130px;
+  overflow: scroll;
 `;
 
 const MatchList = ( { matchData, onMatchClick, onPageChange } ) => {

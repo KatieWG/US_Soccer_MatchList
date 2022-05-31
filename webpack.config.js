@@ -15,7 +15,20 @@ module.exports = {
         test:/\.(js|jsx)$/,
         exclude: /node_modules/,
         use: 'babel-loader'
-      }
+        // ,
+        // loader: 'file-loader'
+      },
+      {
+        test: /\.png$/,
+        use: [
+          {
+            loader: 'url-loader',
+            options: {
+              mimetype: 'image/png',
+            },
+          },
+        ],
+      },
     ]
   },
   mode: 'development',

@@ -9,7 +9,7 @@ const StyledTitleDiv = styled.div`
 height: 100px;
 width: 75%;
 margin-top: 20px;
-color: maroon;
+color: #c62034;
 font-size: 2em;
 float: left;
 `;

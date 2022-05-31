@@ -8,7 +8,7 @@ background-color: white;
 margin-top: 5px;
 margin: 10px 10px 10px 10px;
 padding: 10px;
-color: maroon;
+color: #c62034;
 box-shadow: 0 4px 4px -2px gray;
 border-radius: 3px;
 `;
