@@ -43,6 +43,7 @@ const App = () => {
   const [matches, setMatches] = React.useState([]);
   const [filteredMatches, setFilteredMatches] = React.useState(matches);
   const [match, setMatch] = React.useState([]);
+  const [playerData, setPlayerData] = React.useState([]);
   const [loading, setLoading] = React.useState(true);
   const [homepage, setHomepage] = React.useState(true);
 
@@ -59,6 +60,19 @@ const App = () => {
     })
 
     console.log('invoked getmatches')
+  }
+
+  const getMatch = (opta_game_id) => {
+    axios.get(`/match/${opta_game_id}`)
+    .then(playerStats => {
+      setPlayerData(playerStats.data);
+      setLoading(false);
+    })
+    .catch(err => {
+      console.log('ERR GETTING MATCH:', err);
+    })
+
+    console.log('invoked getmatch')
   }
 
    // ADDS API DATA TO CACHE, PREVENTING AN API CALL ON EVERY REFRESH
@@ -106,12 +120,19 @@ const App = () => {
   const onPageChange = (data = []) => {
     setHomepage(!homepage)
     setMatch(data)
+    console.log('match data in ONPAGECHANGE:', data.game_id)
+    if (homepage) {
+      getMatch(data.game_id);
+    }
   }
 
 
   //ON PAGE LOAD, useEffect WILL RUN
   React.useEffect(() => {
-    getMatches();
+    if (homepage) {
+      getMatches();
+    }
+
     // setTimeout(() => {
     //   addDataIntoCache('MatchCache',
     //   'https://localhost:2828', matches)
@@ -122,7 +143,15 @@ const App = () => {
   return (
     <StyledDiv>
     {loading ?
-      <div>Loading...</div>
+      <div>
+        <NavBar>
+          <StyledImg src={logo} alt="Logo"/>
+          <Search onSearchKeystroke={onSearchKeystroke}/>
+        </NavBar>
+        <div style={{fontSize: "1.7em", marginTop: "170px", textAlign: "center"}}>
+          Loading...
+        </div>
+      </div>
       :
     (homepage ?
       <div>
@@ -139,7 +168,7 @@ const App = () => {
           <Search onSearchKeystroke={onSearchKeystroke}/>
         </NavBar>
         <div>rendering now</div>
-        <MatchStats match={match} onPageChange={onPageChange}/>
+        <MatchStats match={match} onPageChange={onPageChange} playerData={playerData}/>
       </div>
       )
       }

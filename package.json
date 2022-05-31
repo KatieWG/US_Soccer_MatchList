@@ -16,6 +16,7 @@
     "express": "^4.17.1",
     "phosphor-react": "^1.4.0",
     "react": "^16.13.1",
+    "react-data-table-component": "^7.5.2",
     "react-dom": "^16.13.1",
     "source-map-loader": "^3.0.1",
     "styled-components": "^5.3.5",

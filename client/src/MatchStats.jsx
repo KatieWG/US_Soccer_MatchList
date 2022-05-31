@@ -21,8 +21,10 @@ font-size: 1.3em;
 color: grey;
 `;
 
-const MatchStats = ({ match, onPageChange }) => {
-  console.log(match)
+const MatchStats = ({ match, onPageChange, playerData }) => {
+  console.log('match on MATCHSTATS', match)
+  console.log('playerData on MATCHSTATS', playerData)
+
   return (
     <StyledDiv>
       <button onClick={onPageChange}>back</button>
@@ -37,8 +39,9 @@ const MatchStats = ({ match, onPageChange }) => {
         </div>
       </span>
 
-      <div>
-
+      <div style={{fontSize: "1.7em", marginTop: "170px", textAlign: "left"}}>
+        {/* {playerData.length ? playerData[0].player : null} */}
+        //map over player data to render a player per row
       </div>
     </StyledDiv>
   )
