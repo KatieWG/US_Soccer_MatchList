@@ -2,20 +2,19 @@ import React from "react";
 import Match from "./Match.jsx"
 import styled from "styled-components";
 
-
 const StyledDiv = styled.div`
-  margin-top: 80px;
+  margin-top: 130px;
 `;
 
-const MatchList = ( { matchData } ) => {
+const MatchList = ( { matchData, onMatchClick, onPageChange } ) => {
 
   return (
    <StyledDiv>
-    <div>
+    <ul>
       {matchData.map((match, idx) => {
-      return <Match matchData={matchData[idx]} key={idx}/>
+      return <li><Match matchData={matchData[idx]} onPageChange={onPageChange} key={idx}/></li>
     })}
-    </div>
+    </ul>
     </StyledDiv>
   )
 }

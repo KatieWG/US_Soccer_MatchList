@@ -2,6 +2,7 @@
 import * as React from 'react';
 import axios from "axios";
 import MatchList from "./MatchList.jsx";
+import MatchStats from "./MatchStats.jsx";
 import Search from "./Search.jsx";
 import styled from "styled-components";
 // import config from '../../config.js';
@@ -10,15 +11,14 @@ const StyledDiv = styled.div`
   font-family: helvetica neue;
 `;
 
-
 const NavBar = styled.span`
-  height: 65px;
+  height: 95px;
   overflow: hidden;
   background-color: maroon;
   position: fixed;
   top: 0;
   width: 100%;
-  margin-left: 0%;
+  margin-left: -8px;
   box-shadow: 0 4px 4px -2px gray;
   font-family: helvetica neue;
 `;
@@ -37,6 +37,7 @@ const App = () => {
   const [filteredMatches, setFilteredMatches] = React.useState(matches);
   const [match, setMatch] = React.useState([]);
   const [loading, setLoading] = React.useState(true);
+  const [homepage, setHomepage] = React.useState(true);
 
   //REQUESTS DATA FROM SERVER, WHERE OUR API CALL LIVES
   const getMatches = () => {
@@ -47,8 +48,10 @@ const App = () => {
       setLoading(false);
     })
     .catch(err => {
-      console.log('ERR GETTING MATCHES:', err);
+      console.log('ERR GETTING MATCHES:');
     })
+
+    console.log('invoked getmatches')
   }
 
    // ADDS API DATA TO CACHE, PREVENTING AN API CALL ON EVERY REFRESH
@@ -68,6 +71,7 @@ const App = () => {
   };
 
   //SEARCHES BY DATE RANGE AND TEAM NAME
+  //FOR FUTURE VERSIONS: add a debounce feature here to improve time complexity
   const onSearchKeystroke = (e) => {
     e.preventDefault();
     var userSearch = e.target.value;
@@ -91,23 +95,45 @@ const App = () => {
     }
   };
 
+  //WHEN USER CLICKS A MATCH FROM THE LIST, STATE WILL TOGGLE ON App.jsx TO RENDER EITHER MATCHLIST OR MATCHSTATS
+  const onPageChange = (data = []) => {
+    setHomepage(!homepage)
+    setMatch(data)
+  }
+
 
   //ON PAGE LOAD, useEffect WILL RUN
   React.useEffect(() => {
     getMatches();
-    setTimeout(() => {
-      addDataIntoCache('MatchCache',
-      'https://localhost:2828', matches)
-      console.log("Cache delayed for 2 seconds.");
-    }, "2000")
+    // setTimeout(() => {
+    //   addDataIntoCache('MatchCache',
+    //   'https://localhost:2828', matches)
+    //   console.log("Cache delayed for 2 seconds.");
+    // }, "2000")
   }, []);
 
   return (
     <StyledDiv>
-    <NavBar>
-      <Search onSearchKeystroke={onSearchKeystroke}/>
-    </NavBar>
-    {loading ? <div>Loading...</div> : <MatchList matchData={filteredMatches}/>}
+    {loading ?
+      <div>Loading...</div>
+      :
+    (homepage ?
+      <div>
+        <NavBar>
+          <Search onSearchKeystroke={onSearchKeystroke}/>
+        </NavBar>
+        <MatchList matchData={filteredMatches} onPageChange={onPageChange}/>
+      </div>
+      :
+      <div>
+        <NavBar>
+          <Search onSearchKeystroke={onSearchKeystroke}/>
+        </NavBar>
+        <div>rendering now</div>
+        <MatchStats match={match} onPageChange={onPageChange}/>
+      </div>
+      )
+      }
     </StyledDiv>
   )
 }

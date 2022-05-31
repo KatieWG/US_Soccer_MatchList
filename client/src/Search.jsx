@@ -3,12 +3,15 @@ import styled from "styled-components";
 
 const StyledForm = styled.form`
 float: right;
-margin: 20px 15px 20px 15px;
-
+margin: 35px 15px 30px 15px;
+border-radius: 3px;
 `
 
 const StyledInput = styled.input`
 width: 200px;
+`
+
+const StyledIcon = styled.i`
 `
 
 const Search = ({ onSearchKeystroke }) => {
@@ -29,7 +32,7 @@ const Search = ({ onSearchKeystroke }) => {
         />
       </label>
       <button className="search-button">
-        <i className="fa fa-search"></i>
+        <StyledIcon className="fa fa-search"></StyledIcon>
       </button>
     </StyledForm>
     </div>
