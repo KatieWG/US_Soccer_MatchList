@@ -5,22 +5,32 @@ import TeamTwoTable from "./TeamTwoTable.jsx";
 
 const StyledDiv = styled.div`
   margin: 90px 20px;
+  margin-bottom: -20px;
 `;
 
 const StyledTitleDiv = styled.div`
-height: 100px;
-width: 75%;
-margin-top: 20px;
-color: #c62034;
-font-size: 2em;
-float: left;
+  height: 100px;
+  width: 75%;
+  margin-top: 20px;
+  color: #c62034;
+  font-size: 2em;
+  float: left;
 `;
 
 const StyledDateDiv = styled.div`
-float: right;
-margin: 20px 0px 0px 0px;
-font-size: 1.3em;
-color: grey;
+  float: right;
+  margin: 20px 0px 0px 0px;
+  font-size: 1.3em;
+  color: grey;
+`;
+
+const StyledCompetitionDiv = styled.div`
+  height: 100px;
+  width: 75%;
+  margin-top: -50px;
+  color: grey;
+  font-size: 1em;
+  float: left;
 `;
 
 const MatchStats = ({ match, onPageChange, playerData }) => {
@@ -94,13 +104,18 @@ const MatchStats = ({ match, onPageChange, playerData }) => {
           </StyledDateDiv>
         </div>
       </span>
-
-      <div style={{fontSize: "1.7em", marginTop: "170px", textAlign: "left"}}>
-      {homeRoster.length ? <TeamOneTable style={{float: "left"}} players={homeRoster}/> : <div style={{fontSize: "1.7em", marginTop: "170px", textAlign: "center"}}>
+      <br/>
+      <span>
+      <StyledCompetitionDiv>
+        {match.competition}
+      </StyledCompetitionDiv>
+      </span>
+      <div style={{fontSize: "1.7em", marginTop: "90px", textAlign: "left"}}>
+      {homeRoster.length ? <TeamOneTable style={{width: "40%", float: "left"}} players={homeRoster}/> : <div style={{fontSize: "1.7em", marginTop: "170px", textAlign: "center"}}>
           Loading...
         </div>
       }
-      {awayRoster.length ? <TeamTwoTable style={{float: "right"}} players={awayRoster}/> : <div style={{fontSize: "1.7em", marginTop: "170px", textAlign: "center"}}>
+      {awayRoster.length ? <TeamTwoTable style={{width: "40%", float: "right"}} players={awayRoster}/> : <div style={{fontSize: "1.7em", marginTop: "170px", textAlign: "center"}}>
           Loading...
         </div>}
       </div>
