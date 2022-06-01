@@ -75,6 +75,7 @@ const MatchStats = ({ match, onPageChange, playerData }) => {
           roster2.push(player);
         }
       })
+      //sets rosters to equal the sorted arrays of player objects
       setHomeRoster(roster1);
       setAwayRoster(roster2);
   };
@@ -88,9 +89,10 @@ const MatchStats = ({ match, onPageChange, playerData }) => {
     setCount(count + 1)
   }, [homeTeam]);
 
-  //will only render desired content once playerData is retrieved from API
+  //line 92 prevents app from rendering until playerData is retrieved from API
   if (playerData.length === 0) {
-    return (<div style={{fontSize: "1.7em", marginTop: "170px", textAlign: "center"}}>Loading...</div>)
+    return (
+    <div style={{fontSize: "1.7em", marginTop: "170px", textAlign: "center"}}>Loading...</div>)
   } else {
     return (
     <StyledDiv>
@@ -112,10 +114,12 @@ const MatchStats = ({ match, onPageChange, playerData }) => {
       </StyledCompetitionDiv>
       </span>
       <div style={{fontSize: "1.7em", marginTop: "90px", textAlign: "left"}}>
+      {/*Line 118 renders a loading screen until the homeRoster is completed (parsePlayers) */}
       {homeRoster.length ? <TeamOneTable style={{width: "40%", float: "left"}} players={homeRoster}/> : <div style={{fontSize: "1.7em", marginTop: "170px", textAlign: "center"}}>
           Loading...
         </div>
       }
+      {/*Line 118 renders a loading screen until the awayRoster is completed (parsePlayers) */}
       {awayRoster.length ? <TeamTwoTable style={{width: "40%", float: "right"}} players={awayRoster}/> : <div style={{fontSize: "1.7em", marginTop: "170px", textAlign: "center"}}>
           Loading...
         </div>}

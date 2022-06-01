@@ -39,7 +39,7 @@ const App = () => {
   const [loading, setLoading] = useState(true);
   const [homepage, setHomepage] = useState(true);
 
-  //REQUESTS DATA FROM SERVER, WHERE OUR API CALL LIVES
+  //REQUESTS DATA FROM SERVER, WHICH MAKES OUR FIRST API CALL
   const getMatches = () => {
     axios.get('/matches')
     .then(matchesData => {
@@ -54,6 +54,7 @@ const App = () => {
     console.log('invoked getmatches')
   }
 
+  //REQUESTS DATA FROM SERVER, WHICH MAKES OUR SECOND API CALL
   const getMatch = (opta_game_id) => {
     axios.get(`/match/${opta_game_id}`)
     .then(playerStats => {
@@ -67,24 +68,22 @@ const App = () => {
     console.log('invoked getmatch')
   }
 
-   // ADDS API DATA TO CACHE, PREVENTING AN API CALL ON EVERY REFRESH
+   //ADDS API DATA TO CACHE, PREVENTING AN API CALL ON EVERY REFRESH
    const addDataIntoCache = (cacheName, url, response) => {
-    // Converting our response into Actual Response form
     const data = new Response(JSON.stringify(response));
     if ('caches' in window) {
-      // Opening given cache and putting our data into it
       caches.open(cacheName)
       .then((cache) => {
         cache.put(url, data);
       })
       .catch(() => {
-        console.log('unable to cache')
+        console.log('ERR CANNOT CACHE')
       });
     }
   };
 
   //SEARCHES BY DATE RANGE AND TEAM NAME
-  //FOR FUTURE VERSIONS: add a debounce feature here to improve time complexity
+  //FOR FUTURE VERSIONS: add a debounce feature here to optimize - would not search on every keystroke
   const onSearchKeystroke = (e) => {
     e.preventDefault();
     var userSearch = e.target.value;
@@ -95,7 +94,7 @@ const App = () => {
       //filters match NAME and DATE by user search
       matches.map((matchObj) => {
         let lowercaseMatchname = matchObj.fixture.toLowerCase();
-        let matchDate = matchObj.game_date;
+        let matchDate = (new Date(matchData.game_date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })).toLowerCase();
         if (lowercaseMatchname.includes(userSearch) || matchDate.includes(userSearch)) {
           results.push(matchObj);
         }
@@ -119,16 +118,17 @@ const App = () => {
     }
   }
 
-
   //ON PAGE LOAD, useEffect WILL RUN
   useEffect(() => {
+    //on initial render, getMatches will invoke
     if (homepage) {
       getMatches();
     }
+    //after API data has been fetched, it'll be cached into MatchCache on user's browser
     setTimeout(() => {
       addDataIntoCache('MatchCache',
       'https://localhost:2828', matches)
-    }, "2000")
+    }, "1000")
   }, []);
 
   return (
@@ -139,6 +139,7 @@ const App = () => {
           <StyledImg src={logo} alt="Logo"/>
           <Search onSearchKeystroke={onSearchKeystroke}/>
         </NavBar>
+        {/*If 'loading' state is set to true, loading... screen will render */}
         <div style={{fontSize: "1.7em", marginTop: "170px", textAlign: "center"}}>
           Loading...
         </div>
