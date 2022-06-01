@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
+/* STYLED COMPONENTS */
 const StyledTitleDiv = styled.div`
 height: 130px;
 width: 87%;

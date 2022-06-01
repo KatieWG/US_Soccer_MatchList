@@ -1,13 +1,15 @@
-// import React, { useState, useEffect } from "react";
-import * as React from 'react';
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import MatchList from "./MatchList.jsx";
 import MatchStats from "./MatchStats.jsx";
 import Search from "./Search.jsx";
 import styled from "styled-components";
 import logo from "./usSoccerLogo.png";
-// import config from '../../config.js';
 
+/*
+STYLED COMPONENTS (you'll see them at the top of my components) are my preferred way to implement css at the component level.
+To sum it up, you set an html tag with css styling onto a variable, then render the variable name within html tags in your return/render statement.
+*/
 const StyledDiv = styled.div`
   font-family: helvetica neue;
 `;
@@ -24,28 +26,18 @@ const NavBar = styled.span`
   display: flex;
 `;
 
-
 const StyledImg = styled.img`
   height: 70px;
   margin: 15px 15px 15px 15px;
 `;
 
-  // height: 50px;
-  // background-color: grey;
-  // standard-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  // display: flex;
-  // justify-content: space-evenly;
-  // align-items: center;
-  // margin:0;
-  // padding:0;
-
 const App = () => {
-  const [matches, setMatches] = React.useState([]);
-  const [filteredMatches, setFilteredMatches] = React.useState(matches);
-  const [match, setMatch] = React.useState([]);
-  const [playerData, setPlayerData] = React.useState([]);
-  const [loading, setLoading] = React.useState(true);
-  const [homepage, setHomepage] = React.useState(true);
+  const [matches, setMatches] = useState([]);
+  const [filteredMatches, setFilteredMatches] = useState(matches);
+  const [match, setMatch] = useState([]);
+  const [playerData, setPlayerData] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [homepage, setHomepage] = useState(true);
 
   //REQUESTS DATA FROM SERVER, WHERE OUR API CALL LIVES
   const getMatches = () => {
@@ -127,16 +119,14 @@ const App = () => {
 
 
   //ON PAGE LOAD, useEffect WILL RUN
-  React.useEffect(() => {
+  useEffect(() => {
     if (homepage) {
       getMatches();
     }
-
-    // setTimeout(() => {
-    //   addDataIntoCache('MatchCache',
-    //   'https://localhost:2828', matches)
-    //   console.log("Cache delayed for 2 seconds.");
-    // }, "2000")
+    setTimeout(() => {
+      addDataIntoCache('MatchCache',
+      'https://localhost:2828', matches)
+    }, "2000")
   }, []);
 
   return (

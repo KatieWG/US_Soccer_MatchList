@@ -3,6 +3,7 @@ import styled from "styled-components";
 import TeamOneTable from "./TeamOneTable.jsx";
 import TeamTwoTable from "./TeamTwoTable.jsx";
 
+/* STYLED COMPONENTS */
 const StyledDiv = styled.div`
   margin: 90px 20px;
   margin-bottom: -20px;

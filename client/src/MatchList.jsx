@@ -3,14 +3,13 @@ import Match from "./Match.jsx"
 import styled from "styled-components";
 import logo from "./usSoccerLogo.png";
 
-
+/* STYLED COMPONENTS */
 const StyledDiv = styled.div`
   margin-top: 130px;
   overflow: scroll;
 `;
 
 const MatchList = ( { matchData, onMatchClick, onPageChange } ) => {
-
   return (
    <StyledDiv>
     <ul>

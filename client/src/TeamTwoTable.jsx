@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from "react";
 import styled from "styled-components";
 
+/* STYLED COMPONENTS */
 const StyledDiv = styled.div`
   float: right;
 `;
@@ -10,8 +11,9 @@ const StyledCell = styled.div`
   margin-top: -1px;
   font-size: .6em;
   width: 180px;
-  padding: 10px;
+  padding: 15px 10px 15px 10px;
   text-align: left;
+  background-color: #f2f2f2;
 `;
 
 const StyledHeader = styled.div`
@@ -39,14 +41,22 @@ const StyledCell2 = styled.div`
   margin-top: -1px;
   margin-left: -1px;
   font-size: .6em;
+  width: 70px;
+  padding: 15px;
+  text-align: center;
+`;
+
+const StyledCell3 = styled.div`
+  border-style: solid;
+  margin-top: -1px;
+  margin-left: -1px;
+  font-size: .5em;
   width: 80px;
   padding: 10px;
   text-align: center;
 `;
 
 const TeamTwoTable = ({ players }) => {
-  console.log('players in table one', players)
-
   useEffect(() => {
   }, [players]);
 
@@ -66,21 +76,17 @@ const TeamTwoTable = ({ players }) => {
                       <StyledCell>{player.player}</StyledCell>
                       <StyledCell2>{player.xa.value}</StyledCell2>
                       <StyledCell2>{player.xg.value}</StyledCell2>
-                      <StyledCell2>{player.xg.avg}</StyledCell2>
+                      <StyledCell3>{player.xg.avg} xg / {player.xa.avg} xa</StyledCell3>
                     </span>
             })}
         </div>
       </StyledDiv>
     )
-
-
-
   } else {
     return (
       <div>loading...</div>
     )
   }
-
 
 };
 
