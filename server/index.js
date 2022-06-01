@@ -4,39 +4,50 @@ const app = express();
 const axios = require('axios');
 const path = require('path');
 const port = process.env.PORT || 2828;
-// const { API CALL HERE } = require('../controller.js')
+const config = require('../config.js');
 
 app.use(express.static(path.join(__dirname, '..', 'client')));
 app.use(express.json());
 
 // THIS ROUTE WILL INVOKE API CALL FOR ALL MATCHES
-app.get('/', (req, res) => {
-  // API CALL HERE ()
-  // .then(matchData => {
-  //   console.log('MATCH DATA RETRIEVED')
-  //   res.status(200).send(matchData)
-  // })
-  // .catch(err => {
-  //   console.log('ERR RETRIEVING MATCH DATA', err)
-  // })
-  res.send(console.log('IN MATCHES ROUTE'));
+app.get('/matches', (req, res) => {
+  axios({
+      method: "GET",
+      url: 'https://kp9yu8gvth.execute-api.us-east-2.amazonaws.com/prod/lm/fixtures',
+      headers: {
+        'x-api-key': config.Authorization,
+        "Content-Type": "application/json",
+      }
+    })
+  .then(matchData => {
+    console.log('MATCH DATA RETRIEVED')
+    res.status(200).send(matchData.data);
+  })
+  .catch(err => {
+    console.log('ERR RETRIEVING MATCH DATA', err)
+  })
 })
 
-// THIS ROUTE WILL INVOKE API CALL FOR ONE MATCH
-// app.get('/match/:game_id', (req, res) => {
-  // API CALL HERE (req.params.game_id)
-  // .then(matchData => {
-  //   console.log('MATCH DATA RETRIEVED')
-  //   res.status(200).send(matchData)
-  // })
-  // .catch(err => {
-  //   console.log('ERR RETRIEVING MATCH DATA', err)
-  // })
-//   console.log('IN 1 MATCH ROUTE')
-// })
+app.get('/match/:opta_game_id', (req, res) => {
+  console.log('inside MATCH route in server', req.params.opta_game_id)
+  axios({
+    method: "GET",
+    url: `https://kp9yu8gvth.execute-api.us-east-2.amazonaws.com/prod/lm/players_metrics?opta_game_id=${req.params.opta_game_id}`,
+    headers: {
+      'x-api-key': config.Authorization,
+      "Content-Type": "application/json",
+    }
+  })
+    .then(matchData => {
+    console.log('MATCH DATA RETRIEVED')
+    res.status(200).send(matchData.data);
+  })
+  .catch(err => {
+    console.log('ERR RETRIEVING MATCH DATA', err)
+  })
+});
 
 
 app.listen(port, () => {
-  console.log(`The app server is running on port: ${port}!`);
-})
-
+  console.log(`App listening on port ${port}`);
+});

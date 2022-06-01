@@ -1,25 +1,39 @@
 const path = require('path');
 
+const SRC_DIR = path.join(__dirname, 'client', 'src');
+const OUT_DIR = path.join(__dirname, 'client', 'dist');
+
 module.exports = {
-  entry: '/client/src/index.js',
+  entry: path.join(SRC_DIR, 'index.js'),
   output: {
-    path: path.resolve(__dirname, 'client/dist'),
+    path: OUT_DIR,
     filename: 'bundle.js'
   },
   module: {
-    rules: [{
-      test:/\.(js|jsx|css)$/,
-      exclude: /node_modules/,
-      use: 'babel-loader'
+    rules: [
+      {
+        test:/\.(js|jsx)$/,
+        exclude: /node_modules/,
+        use: 'babel-loader'
+        // ,
+        // loader: 'file-loader'
       },
       {
-        test: /\.css$/i,
-        use: ['style-loader', 'css-loader'],
-      }
+        test: /\.png$/,
+        use: [
+          {
+            loader: 'url-loader',
+            options: {
+              mimetype: 'image/png',
+            },
+          },
+        ],
+      },
     ]
   },
   mode: 'development',
   resolve: {
     extensions: ['.js', '.jsx', '.css']
   }
-}
+};
+
