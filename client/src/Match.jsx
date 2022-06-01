@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import backupLogo from "./soccerball_default_logo.png";
 
 const StyledTitleDiv = styled.div`
 height: 130px;

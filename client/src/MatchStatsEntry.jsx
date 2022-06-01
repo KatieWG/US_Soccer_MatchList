@@ -1,10 +1,12 @@
 import React from "react";
 import styled from "styled-components";
 
-const MatchStatsEntry = ({ }) => {
+const MatchStatsEntry = ({ player }) => {
 
   return (
-    <div>MatchStatsEntry</div>
+    <div>
+      {player.player} - {player.team}
+    </div>
   )
 
 };

@@ -120,7 +120,6 @@ const App = () => {
   const onPageChange = (data = []) => {
     setHomepage(!homepage)
     setMatch(data)
-    console.log('match data in ONPAGECHANGE:', data.game_id)
     if (homepage) {
       getMatch(data.game_id);
     }
@@ -168,7 +167,9 @@ const App = () => {
           <Search onSearchKeystroke={onSearchKeystroke}/>
         </NavBar>
         <div>rendering now</div>
-        <MatchStats match={match} onPageChange={onPageChange} playerData={playerData}/>
+        {playerData.length ? <MatchStats match={match} onPageChange={onPageChange} playerData={playerData}/> : <div style={{fontSize: "1.7em", marginTop: "170px", textAlign: "center"}}>
+          Loading...
+        </div>}
       </div>
       )
       }
