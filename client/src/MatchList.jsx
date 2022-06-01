@@ -14,7 +14,7 @@ const MatchList = ( { matchData, onMatchClick, onPageChange } ) => {
    <StyledDiv>
     <ul>
       {matchData.map((match, idx) => {
-      return <li><Match matchData={matchData[idx]} onPageChange={onPageChange} key={idx}/></li>
+      return <li><Match matchData={matchData[idx]} onPageChange={onPageChange} key={idx + 1}/></li>
     })}
     </ul>
     </StyledDiv>

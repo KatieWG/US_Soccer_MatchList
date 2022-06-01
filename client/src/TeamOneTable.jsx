@@ -73,8 +73,8 @@ const TeamOneTable = ({ players }) => {
         <StyledHeader2>Avg</StyledHeader2>
         </span>
         <div style={{width: "40%", display: "table", marginBottom: "10%", float: "left"}}>
-        {players.map((player) => {
-            return  <span style={{display: "flex"}}>
+        {players.map((player, idx) => {
+            return  <span key={idx} style={{display: "flex"}}>
                       <StyledCell>{player.player}</StyledCell>
                       <StyledCell2>{player.xa.value}</StyledCell2>
                       <StyledCell2>{player.xg.value}</StyledCell2>

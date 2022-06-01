@@ -114,6 +114,8 @@ const App = () => {
     setMatch(data)
     if (homepage) {
       getMatch(data.game_id);
+    } else {
+      setPlayerData([])
     }
   }
 
