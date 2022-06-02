@@ -60,17 +60,21 @@ const TeamTwoTable = ({ players }) => {
   useEffect(() => {
   }, [players]);
 
+  //line 64 prevents app from rendering until this component has received the necessary data (players)
   if (players.length) {
     return (
       <StyledDiv className="container">
+        {/* I fashioned a data table with react divs (not a very graceful solution), but given more time and resources would implement it with D3 or another data modeling library */}
         <div style={{marginBottom: "20px", color: "black", fontSize: "1em"}}>{players[0].team}</div>
-        <span style={{display: "flex"}}>
-        <StyledHeader>Player</StyledHeader>
-        <StyledHeader2>XA</StyledHeader2>
-        <StyledHeader2>XG</StyledHeader2>
-        <StyledHeader2>Avg</StyledHeader2>
-        </span>
+          <span style={{display: "flex"}}>
+            {/* I plan to do more research on how to render this data in the most optimized way */}
+            <StyledHeader>Player</StyledHeader>
+            <StyledHeader2>XA</StyledHeader2>
+            <StyledHeader2>XG</StyledHeader2>
+            <StyledHeader2>Avg</StyledHeader2>
+          </span>
         <div style={{width: "40%", display: "table", marginBottom: "10%", float: "left"}}>
+          {/* line 76 maps over 'players' and renders a line of data per player in the array of objects */}
           {players.map((player, idx) => {
             return  <span key={idx} style={{display: "flex"}}>
                       <StyledCell>{player.player}</StyledCell>
@@ -82,9 +86,10 @@ const TeamTwoTable = ({ players }) => {
         </div>
       </StyledDiv>
     )
+  //If component has not received necessary data, it will render the loading screen
   } else {
     return (
-      <div>loading...</div>
+      <div style={{fontSize: "1.7em"}}>Loading...</div>
     )
   }
 

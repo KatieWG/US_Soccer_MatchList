@@ -1,4 +1,3 @@
-// write header
 const express = require('express');
 const app = express();
 const axios = require('axios');
@@ -28,6 +27,7 @@ app.get('/matches', (req, res) => {
   })
 })
 
+// THIS ROUTE WILL INVOKE API CALL FOR ONE MATCH
 app.get('/match/:opta_game_id', (req, res) => {
   console.log('inside MATCH route in server', req.params.opta_game_id)
   axios({
@@ -38,7 +38,7 @@ app.get('/match/:opta_game_id', (req, res) => {
       "Content-Type": "application/json",
     }
   })
-    .then(matchData => {
+  .then(matchData => {
     console.log('MATCH DATA RETRIEVED')
     res.status(200).send(matchData.data);
   })
