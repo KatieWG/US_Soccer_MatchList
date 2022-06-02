@@ -40,13 +40,14 @@ https://user-images.githubusercontent.com/86626323/171543560-8cd41e92-b67f-4f34-
 
 --------------------------------------------------------------------------------------
 
-TO RUN SITE ->
+TO RUN SITE -->
   1. In a terminal window, run 'npm start'. This will start the nodemon server.
   2. In another terminal window, run 'npm run watch'. This will start the webpack, compiling our jsx files.
   3. Navigate to index.html
   4. Right click in file & select 'Open in default browser'
 
-
-TO DEPLOY SITE ->
-    - OPTION 1: Use an S3 instance to deploy the bundle.js and index.html files.
-    - OPTION 2: Use an EC2 micro instance to deploy the entire application.
+TO DEPLOY SITE -->
+      <br/>
+      (OPTION 1) Use an S3 instance to deploy the bundle.js and index.html files.
+      <br/>
+      (OPTION 2) Use an EC2 micro instance to deploy the entire application.
