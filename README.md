@@ -50,4 +50,4 @@ TO DEPLOY SITE -->
       <br/>
       (OPTION 1) Use an S3 instance to deploy the bundle.js and index.html files.
       <br/>
-      (OPTION 2) Use an EC2 micro instance to deploy the entire application.
+      (OPTION 2) Use an EC2 instance to deploy the entire application.
