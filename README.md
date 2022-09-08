@@ -50,7 +50,6 @@ https://user-images.githubusercontent.com/86626323/171543560-8cd41e92-b67f-4f34-
   4. Right click in file & select 'Open in default browser'
 
 #### 🚀 TO DEPLOY SITE →
-      <br/>
-      (OPTION 1) Use an S3 instance to deploy the bundle.js and index.html files.
-      <br/>
-      (OPTION 2) Use an EC2 instance to deploy the entire application.
+   (OPTION 1) Use an S3 instance to deploy the bundle.js and index.html files.
+   </br>
+   (OPTION 2) Use an EC2 instance to deploy the entire application.
