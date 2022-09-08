@@ -1,7 +1,7 @@
 # ⚽️ US_Soccer_MatchList 
 
 ## 🔵 Overview
-I coded this project over 48 working hours for a coding assessment as part of the interview process for a company whose name I am not able to disclose. I was tasked with connecting two API endpoints, and using that data to create a multi-page application that listed all upcoming soccer matches on page load. Additionally, upon clicking on a match, the user should be able to view player stats for both teams in a way that is simple, clean and easy to read for coaches mid-game.  
+I coded this project over 48 working hours for a coding assessment as part of an interview process. In this full-stack app, I connected two API endpoints, and used that data to create a multi-page application that listed all upcoming soccer matches on page load. Additionally, upon clicking on a match, the user should be able to view player stats…
 
 ## 🔴 Walkthrough
 
