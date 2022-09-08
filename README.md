@@ -17,7 +17,7 @@ https://user-images.githubusercontent.com/86626323/171543560-8cd41e92-b67f-4f34-
 
 --------------------------------------------------------------------------------------
 
-## 🟢 Setup
+## 🛠 Setup
 
 #### 1. Coding environment →
     - Create a package.json file
